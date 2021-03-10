@@ -1,0 +1,42 @@
+{
+  "name": "json-deep-merge-patch",
+  "version": "0.1.0",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "scripts": {
+    "bench": "node ./bench.js",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
+    "lint:fix": "./node_modules/.bin/eslint . --ext .js --fix",
+    "test": "uvu tests",
+    "test:coverage": "c8 --clean --all --include=src yarn test",
+    "test:report": "c8 report --reporter=html",
+    "test:watch": "watchlist ./src ./tests -- yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naumf/json-deep-merge-patch.git"
+  },
+  "author": "Naum Fidanovski <naum.fidanovski@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "c8": "^7.6.0",
+    "deepmerge": "^4.2.2",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-prettier-standard": "^4.0.1",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "json-merge-patch": "^1.0.1",
+    "prettier": "^2.2.1",
+    "prettier-config-standard": "^4.0.0",
+    "prettier-standard": "^16.4.1",
+    "typescript": "^4.2.3",
+    "uvu": "^0.5.1",
+    "watchlist": "^0.2.3"
+  }
+}
