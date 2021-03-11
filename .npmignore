@@ -9,4 +9,11 @@ yarn-error.log*
 /node_modules
 /.vscode
 /coverage
+/tests
+bench.js
+.prettierrc.js
+.eslintrc.js
+.eslintignore
+.editorconfig
 *.tgz
+tsconfig.json
