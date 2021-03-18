@@ -31,7 +31,11 @@ function cloneObject(obj) {
     } else if (isArray(value)) {
       cloned[name] = cloneArray(value)
     } else if (isObject(value)) {
-      cloned[name] = Object.assign({}, cloneObject(value))
+      if (value instanceof Date) {
+        cloned[name] = new Date(value)
+      } else {
+        cloned[name] = Object.assign({}, cloneObject(value))
+      }
     } else {
       cloned[name] = value
     }
