@@ -17,3 +17,5 @@ bench.js
 .editorconfig
 *.tgz
 tsconfig.json
+sonar-project.properties
+/.scannerwork

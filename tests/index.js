@@ -37,7 +37,8 @@ const target = {
       thirdLevelArray: [1, 2, 3],
       thirdLevelNestedObject: {
         fourthLevelObject: {},
-        fourthLevelNumber: 4
+        fourthLevelNumber: 4,
+        fourthLevelDate: new Date()
       }
     }
   }
@@ -48,7 +49,7 @@ testSuite('should be a function', () => {
 })
 
 testSuite('should be RFC 7396 compliant without mutating target', () => {
-  const target = {
+  const compliantTarget = {
     title: 'Goodbye!',
     author: {
       givenName: 'John',
@@ -58,7 +59,7 @@ testSuite('should be RFC 7396 compliant without mutating target', () => {
     content: 'This will be unchanged'
   }
 
-  const patch = {
+  const compliantPatch = {
     title: 'Hello!',
     phoneNumber: '+01-123-456-7890',
     author: {
@@ -77,10 +78,10 @@ testSuite('should be RFC 7396 compliant without mutating target', () => {
     phoneNumber: '+01-123-456-7890'
   }
 
-  const result = jsonDeepMergePatch(target, patch)
+  const result = jsonDeepMergePatch(compliantTarget, compliantPatch)
 
   assert.equal(result, expectedResult)
-  assert.equal(target, {
+  assert.equal(compliantTarget, {
     title: 'Goodbye!',
     author: {
       givenName: 'John',
@@ -233,13 +234,14 @@ testSuite('should go deep to depth = 2 without mutating target', () => {
 })
 
 testSuite(
-  'should go deep to last level (depth = 0, default) without mutating target',
+  'should go deep to last level (depth = null, default) without mutating target',
   () => {
     const patch = {
       firstLevelNestedObject: {
         secondLevelNestedObject: {
           thirdLevelNestedObject: {
-            fourthLevelNumber: 44
+            fourthLevelNumber: 44,
+            fourthLevelDate: new Date()
           }
         }
       },
