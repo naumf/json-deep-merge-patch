@@ -40,11 +40,11 @@ function processPatchProps({
   depth
 }) {
   for (const name in patch) {
-    if (cloneUnpatchedProps) {
-      targetNames.push(name)
-    }
     if (isPropNotOk(patch, name)) {
       continue
+    }
+    if (cloneUnpatchedProps) {
+      targetNames.push(name)
     }
     const value = patch[name]
 
