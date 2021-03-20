@@ -14,9 +14,20 @@ module.exports = {
   },
   rules: {
     strict: ['error', 'global'],
+    'no-unused-vars': [
+      'error',
+      {
+        varsIgnorePattern: '^_',
+        vars: 'all',
+        args: 'none',
+        ignoreRestSiblings: true
+      }
+    ],
     indent: 'off',
     curly: [2, 'all'],
     'guard-for-in': ['error'],
+    'no-shadow': [2, { builtinGlobals: false, hoist: 'functions', allow: [] }],
+    'no-return-await': ['error'],
     // default is 10
     complexity: ['error', { max: 15 }],
     // default is 15
@@ -31,12 +42,13 @@ module.exports = {
     'sonarjs/no-redundant-boolean': 'error',
     'sonarjs/no-redundant-jump': 'error',
     // 'sonarjs/no-same-line-conditional': 'error'
-    'sonarjs/no-small-switch': 'error',
+    // 'sonarjs/no-small-switch': 'error',
     'sonarjs/no-unused-collection': 'error',
     'sonarjs/no-useless-catch': 'error',
     'sonarjs/prefer-immediate-return': 'error',
     // 'sonarjs/prefer-object-literal': 'error'
     'sonarjs/prefer-single-boolean-return': 'error',
-    'sonarjs/prefer-while': 'error'
+    'sonarjs/prefer-while': 'error',
+    'sonarjs/no-extra-arguments': 'error'
   }
 }
