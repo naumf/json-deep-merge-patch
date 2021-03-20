@@ -40,8 +40,12 @@ function processPatchProps({
   depth
 }) {
   for (const name in patch) {
-    if (cloneUnpatchedProps) targetNames.push(name)
-    if (isPropNotOk(patch, name)) continue
+    if (cloneUnpatchedProps) {
+      targetNames.push(name)
+    }
+    if (isPropNotOk(patch, name)) {
+      continue
+    }
     const value = patch[name]
 
     if (value === null && hasOwnProp(target, name)) {
@@ -97,9 +101,15 @@ function _jsonDeepMergePatch(
   patch,
   { depth, keepNulls, cloneUnpatchedProps }
 ) {
-  if (patch instanceof Date) return new Date(patch)
-  if (!isObject(patch)) return patch
-  if (isArray(patch)) return cloneArray(patch)
+  if (patch instanceof Date) {
+    return new Date(patch)
+  }
+  if (!isObject(patch)) {
+    return patch
+  }
+  if (isArray(patch)) {
+    return cloneArray(patch)
+  }
   target = prepareTarget(target)
 
   const targetNames = []

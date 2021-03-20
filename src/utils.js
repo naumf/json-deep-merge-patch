@@ -21,10 +21,14 @@ function isObject(operand) {
 }
 
 function cloneObject(obj) {
-  if (obj instanceof Date) return new Date(obj)
+  if (obj instanceof Date) {
+    return new Date(obj)
+  }
   const cloned = {}
   for (const name in obj) {
-    if (!hasOwnProp(obj, name) || isInvalidProp(name)) continue
+    if (!hasOwnProp(obj, name) || isInvalidProp(name)) {
+      continue
+    }
     const value = obj[name]
     if (isNullish(value)) {
       cloned[name] = value
