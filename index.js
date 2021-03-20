@@ -10,7 +10,9 @@ const defaultOpts = {
 
 function jsonDeepMergePatch(target, patch, opts) {
   opts = Object.assign({}, defaultOpts, opts)
-  if (!opts.depth) opts.depth = 0
+  if (!opts.depth) {
+    opts.depth = 0
+  }
   if (typeof opts.depth !== 'number' || opts.depth < 0) {
     throw new Error('Merge level must be a whole number or null.')
   }
