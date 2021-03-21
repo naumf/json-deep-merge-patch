@@ -28,6 +28,9 @@ module.exports = {
     'guard-for-in': ['error'],
     'no-shadow': [2, { builtinGlobals: false, hoist: 'functions', allow: [] }],
     'no-return-await': ['error'],
+    'line-comment-position': ['error', { position: 'above' }],
+    'consistent-return': 'error',
+    'object-shorthand': 'error',
     // default is 10
     complexity: ['error', { max: 15 }],
     // default is 15
