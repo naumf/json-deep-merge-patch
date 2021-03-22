@@ -56,13 +56,15 @@ function processPatchProps({
       target[name] = _jsonDeepMergePatch(target[name], value, {
         depth: depth - 1,
         keepNulls,
-        cloneUnpatchedProps
+        cloneUnpatchedProps,
+        root: false
       })
     } else if (depth === 0 || !isObject(value)) {
       target[name] = _jsonDeepMergePatch(target[name], value, {
         depth,
         keepNulls,
-        cloneUnpatchedProps
+        cloneUnpatchedProps,
+        root: false
       })
     } else if (isArray(value)) {
       target[name] = cloneArray(value)
@@ -89,7 +91,8 @@ function processTargetProps({
       target[name] = _jsonDeepMergePatch(target[name], value, {
         depth,
         keepNulls,
-        cloneUnpatchedProps
+        cloneUnpatchedProps,
+        root: false
       })
     } else if (isArray(value)) {
       target[name] = cloneArray(value)
@@ -102,7 +105,7 @@ function processTargetProps({
 function _jsonDeepMergePatch(
   target,
   patch,
-  { depth, keepNulls, cloneUnpatchedProps }
+  { depth, keepNulls, cloneUnpatchedProps, root }
 ) {
   if (patch instanceof Date) {
     return new Date(patch)
@@ -126,7 +129,7 @@ function _jsonDeepMergePatch(
     depth
   })
 
-  if (isPatchEmpty) {
+  if (isPatchEmpty && !root) {
     target = {}
   }
 

@@ -564,7 +564,7 @@ testSuite(
 )
 
 testSuite(
-  `should not deep merge target's props if patch is an empty object`,
+  `should not deep merge target's props if patch prop is an empty object`,
   () => {
     const patch = {
       firstLevelAnotherNestedObject: {
@@ -576,39 +576,7 @@ testSuite(
       cloneUnpatchedProps: false,
       keepNulls: true
     })
-
-    assert.equal(
-      result.firstLevelAnotherNestedObject.secondLevelNestedObject,
-      {}
-    )
-    assert.not.equal(
-      target.firstLevelAnotherNestedObject.secondLevelNestedObject,
-      {}
-    )
-
-    assert.type(
-      result.firstLevelAnotherNestedObject.secondLevelNestedObject
-        .thirdLevelNumber,
-      'undefined'
-    )
-    assert.is(
-      target.firstLevelAnotherNestedObject.secondLevelNestedObject
-        .thirdLevelNumber,
-      3
-    )
-  }
-)
-
-testSuite(
-  `should not deep merge target's props if patch is an empty object and cloneUnpatchedProps = true`,
-  () => {
-    const patch = {
-      firstLevelAnotherNestedObject: {
-        secondLevelNestedObject: {}
-      }
-    }
-
-    const result = jsonDeepMergePatch(target, patch, {
+    const resultClone = jsonDeepMergePatch(target, patch, {
       cloneUnpatchedProps: true
     })
 
@@ -616,6 +584,10 @@ testSuite(
       result.firstLevelAnotherNestedObject.secondLevelNestedObject,
       {}
     )
+    assert.equal(
+      resultClone.firstLevelAnotherNestedObject.secondLevelNestedObject,
+      {}
+    )
     assert.not.equal(
       target.firstLevelAnotherNestedObject.secondLevelNestedObject,
       {}
@@ -626,6 +598,11 @@ testSuite(
         .thirdLevelNumber,
       'undefined'
     )
+    assert.type(
+      resultClone.firstLevelAnotherNestedObject.secondLevelNestedObject
+        .thirdLevelNumber,
+      'undefined'
+    )
     assert.is(
       target.firstLevelAnotherNestedObject.secondLevelNestedObject
         .thirdLevelNumber,
@@ -633,5 +610,21 @@ testSuite(
     )
   }
 )
+
+testSuite(`should return target if patch is an empty object`, () => {
+  const result = jsonDeepMergePatch(target, {})
+  const resultClone = jsonDeepMergePatch(
+    target,
+    {},
+    { cloneUnpatchedProps: true }
+  )
+  assert.equal(result, target)
+  assert.equal(resultClone, target)
+  assert.is(result.firstLevelNestedObject, target.firstLevelNestedObject)
+  assert.is.not(
+    resultClone.firstLevelNestedObject,
+    target.firstLevelNestedObject
+  )
+})
 
 testSuite.run()

@@ -16,6 +16,7 @@ function jsonDeepMergePatch(target, patch, opts) {
   if (typeof opts.depth !== 'number' || opts.depth < 0) {
     throw new Error('Merge level must be a whole number or null.')
   }
+  opts.root = true
   return _jsonDeepMergePatch(target, patch, opts)
 }
 

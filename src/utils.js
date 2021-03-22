@@ -21,6 +21,9 @@ function isObject(operand) {
 }
 
 function cloneObject(obj) {
+  if (obj === null) {
+    return null
+  }
   if (obj instanceof Date) {
     return new Date(obj)
   }
