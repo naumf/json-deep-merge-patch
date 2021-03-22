@@ -563,4 +563,75 @@ testSuite(
   }
 )
 
+testSuite(
+  `should not deep merge target's props if patch is an empty object`,
+  () => {
+    const patch = {
+      firstLevelAnotherNestedObject: {
+        secondLevelNestedObject: {}
+      }
+    }
+
+    const result = jsonDeepMergePatch(target, patch, {
+      cloneUnpatchedProps: false,
+      keepNulls: true
+    })
+
+    assert.equal(
+      result.firstLevelAnotherNestedObject.secondLevelNestedObject,
+      {}
+    )
+    assert.not.equal(
+      target.firstLevelAnotherNestedObject.secondLevelNestedObject,
+      {}
+    )
+
+    assert.type(
+      result.firstLevelAnotherNestedObject.secondLevelNestedObject
+        .thirdLevelNumber,
+      'undefined'
+    )
+    assert.is(
+      target.firstLevelAnotherNestedObject.secondLevelNestedObject
+        .thirdLevelNumber,
+      3
+    )
+  }
+)
+
+testSuite(
+  `should not deep merge target's props if patch is an empty object and cloneUnpatchedProps = true`,
+  () => {
+    const patch = {
+      firstLevelAnotherNestedObject: {
+        secondLevelNestedObject: {}
+      }
+    }
+
+    const result = jsonDeepMergePatch(target, patch, {
+      cloneUnpatchedProps: true
+    })
+
+    assert.equal(
+      result.firstLevelAnotherNestedObject.secondLevelNestedObject,
+      {}
+    )
+    assert.not.equal(
+      target.firstLevelAnotherNestedObject.secondLevelNestedObject,
+      {}
+    )
+
+    assert.type(
+      result.firstLevelAnotherNestedObject.secondLevelNestedObject
+        .thirdLevelNumber,
+      'undefined'
+    )
+    assert.is(
+      target.firstLevelAnotherNestedObject.secondLevelNestedObject
+        .thirdLevelNumber,
+      3
+    )
+  }
+)
+
 testSuite.run()

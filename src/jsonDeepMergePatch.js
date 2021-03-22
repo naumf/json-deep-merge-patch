@@ -39,10 +39,12 @@ function processPatchProps({
   keepNulls,
   depth
 }) {
+  let isPatchEmpty = true
   for (const name in patch) {
     if (isPropNotOk(patch, name)) {
       continue
     }
+    isPatchEmpty = false
     if (cloneUnpatchedProps) {
       targetNames.push(name)
     }
@@ -68,6 +70,7 @@ function processPatchProps({
       target[name] = cloneObject(value)
     }
   }
+  return isPatchEmpty
 }
 
 function processTargetProps({
@@ -114,7 +117,7 @@ function _jsonDeepMergePatch(
 
   const targetNames = []
 
-  processPatchProps({
+  const isPatchEmpty = processPatchProps({
     patch,
     target,
     cloneUnpatchedProps,
@@ -122,6 +125,10 @@ function _jsonDeepMergePatch(
     keepNulls,
     depth
   })
+
+  if (isPatchEmpty) {
+    target = {}
+  }
 
   if (cloneUnpatchedProps) {
     processTargetProps({
